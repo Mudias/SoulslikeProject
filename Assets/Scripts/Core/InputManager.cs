@@ -7,15 +7,15 @@ namespace Ludias.Core
 {
     public class InputManager : MonoBehaviour
     {
-        PlayerInputActions playerInputActions;
-        PlayerInputActions.PlayerActions playerAction;
+        public PlayerInputActions playerInputActions;
+        public PlayerInputActions.PlayerActions playerAction;
         PlayerMovement playerMovement;
         GameObject playerGO;
 
         private void Awake()
         {
-            playerAction = playerInputActions.Player;
             playerInputActions = new PlayerInputActions();
+            playerAction = playerInputActions.Player;
         }
 
         private void Start()
