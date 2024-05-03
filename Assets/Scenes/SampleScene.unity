@@ -429,11 +429,64 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8985540585461299095, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8985540585461299095, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 593068318}
+    - targetCorrespondingSourceObject: {fileID: 8985540585461299095, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 593068317}
   m_SourcePrefab: {fileID: 100100000, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+--- !u!1 &593068316 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8985540585461299095, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+  m_PrefabInstance: {fileID: 593068315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &593068317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593068316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c691b76e820f77041b07d86a80fb991f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
+--- !u!143 &593068318
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593068316}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
