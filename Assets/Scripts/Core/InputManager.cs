@@ -1,4 +1,5 @@
 using Ludias.Characters;
+using Ludias.StateMachines.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,8 +10,10 @@ namespace Ludias.Core
     {
         public PlayerInputActions playerInputActions;
         public PlayerInputActions.PlayerActions playerAction;
-        PlayerMovement playerMovement;
-        GameObject playerGO;
+
+        private PlayerMovement playerMovement;
+        private PlayerStateMachine playerStateMachine;
+        private GameObject playerGO;
 
         private void Awake()
         {
@@ -22,6 +25,9 @@ namespace Ludias.Core
         {
             playerGO = GameObject.FindGameObjectWithTag("Player");
             playerMovement = playerGO.GetComponent<PlayerMovement>();
+            playerStateMachine = playerGO.GetComponent<PlayerStateMachine>();
+
+            playerAction.Jump.performed += ctx => playerStateMachine.OnJump();
         }
 
         private void OnEnable()

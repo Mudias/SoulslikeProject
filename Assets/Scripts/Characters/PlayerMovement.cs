@@ -9,7 +9,7 @@ namespace Ludias.Characters
     {
         [SerializeField] float moveSpeed;
 
-        bool isGrounded;
+        private bool isGrounded;
         private float gravity = -9.81f;
         private Camera mainCam;
         private CharacterController characterController;
