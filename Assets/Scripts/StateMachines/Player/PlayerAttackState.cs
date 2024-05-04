@@ -17,6 +17,9 @@ namespace Ludias.StateMachines.Player
         public override void Tick(float deltaTime)
         {
             timer += Time.deltaTime;
+
+            stateMachine.GetAnimator().SetFloat("FreeLookSpeed", 0, 0.1f, deltaTime);
+            stateMachine.GetAnimator().SetFloat("FreeLookSpeed", 1, 0.1f, deltaTime);
         }
 
         public override void Exit()
