@@ -768,7 +768,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.05
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 1.125, z: 0}
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!114 &8441644942116104957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,6 +794,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b24f30533643044aa57290d87e18d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 0
+  animator: {fileID: 224565172685277198}
+  rotationDamping: 10
 --- !u!1 &3031867446167309317
 GameObject:
   m_ObjectHideFlags: 0

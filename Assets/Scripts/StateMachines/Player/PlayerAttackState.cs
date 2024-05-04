@@ -7,6 +7,7 @@ namespace Ludias.StateMachines.Player
     {
         public PlayerAttackState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
+        private readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
         private float timer;
 
         public override void Enter()
@@ -18,8 +19,8 @@ namespace Ludias.StateMachines.Player
         {
             timer += Time.deltaTime;
 
-            stateMachine.GetAnimator().SetFloat("FreeLookSpeed", 0, 0.1f, deltaTime);
-            stateMachine.GetAnimator().SetFloat("FreeLookSpeed", 1, 0.1f, deltaTime);
+            stateMachine.GetAnimator().SetFloat(FreeLookSpeedHash, 0, 0.1f, deltaTime);
+            stateMachine.GetAnimator().SetFloat(FreeLookSpeedHash, 1, 0.1f, deltaTime);
         }
 
         public override void Exit()
@@ -31,5 +32,7 @@ namespace Ludias.StateMachines.Player
         {
             stateMachine.SwitchState(new PlayerAttackState(stateMachine));
         }
+
+        //private Vector3 CalculateMovement()
     }
 }

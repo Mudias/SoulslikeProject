@@ -42,7 +42,8 @@ namespace Ludias.Core
 
         private void Update()
         {
-            playerMovement.ProcessMove(playerAction.Move.ReadValue<Vector2>());
+            playerStateMachine.MovementInputValue(playerAction.Move.ReadValue<Vector2>());
+            //playerMovement.ProcessMove(playerAction.Move.ReadValue<Vector2>());
         }
     }
 }

@@ -33,11 +33,12 @@ namespace Ludias.Characters
 
         public void ProcessMove(Vector2 input)
         {
-            moveDir = input.x * mainCam.transform.TransformDirection(Vector3.right) + input.y * mainCam.transform.TransformDirection(Vector3.up);
+            moveDir = input.x * mainCam.transform.TransformDirection(Vector3.right) + input.y * mainCam.transform.TransformDirection(Vector3.forward);
             moveDir.y = 0;
             moveDir.Normalize();
 
             characterController.Move(moveDir * moveSpeed * Time.deltaTime);
+            return;
             playerVelocity.y += gravity * Time.deltaTime;
 
             if (isGrounded && playerVelocity.y < 0)
