@@ -9,6 +9,7 @@ namespace Ludias
     {
         public PlayerFreeLookState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
+        private readonly int FreeLookBlendTreeHash = Animator.StringToHash("FreeLookBlendTree");
         private readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
 
         private const float animatorDampTime = 0.1f;
@@ -16,12 +17,15 @@ namespace Ludias
         private bool isGrounded;
         private Vector3 moveDir;
         private Vector3 calculatedMoveDir;
+        private Vector3 calculatedPlayerVelocity;
         private Vector3 playerVelocity;
 
         public override void Enter()
         {
             stateMachine.OnJumped += OnJump;
             stateMachine.OnEnemyTargeted += StateMachine_OnEnemyTargeted;
+
+            stateMachine.GetAnimator().Play(FreeLookBlendTreeHash);
         }
 
         public override void Tick(float deltaTime)
@@ -29,6 +33,11 @@ namespace Ludias
             isGrounded = stateMachine.GetCharacterController().isGrounded;
 
             calculatedMoveDir = CalculateMovement(deltaTime);
+            calculatedPlayerVelocity = CalculatePlayerVelocity(deltaTime);
+
+            Move(calculatedMoveDir, stateMachine.GetMoveSpeed(), deltaTime);
+            Move(calculatedPlayerVelocity, 1, deltaTime);
+
             if (stateMachine.GetMovementInputValue() == Vector2.zero)
             {
                 stateMachine.GetAnimator().SetFloat(FreeLookSpeedHash, 0, animatorDampTime, deltaTime);
@@ -61,7 +70,11 @@ namespace Ludias
             moveDir.y = 0;
             moveDir.Normalize();
 
-            stateMachine.GetCharacterController().Move(moveDir * stateMachine.GetMoveSpeed() * deltaTime);
+            return moveDir;
+        }
+
+        private Vector3 CalculatePlayerVelocity(float deltaTime)
+        {
             playerVelocity.y += gravity * deltaTime;
 
             if (isGrounded && playerVelocity.y < 0)
@@ -69,9 +82,7 @@ namespace Ludias
                 playerVelocity.y = -2;
             }
 
-            stateMachine.GetCharacterController().Move(playerVelocity * deltaTime);
-
-            return moveDir;
+            return playerVelocity;
         }
 
         private void FaceMovementDirection(Vector3 movement, float deltaTime)

@@ -13,6 +13,7 @@ namespace Ludias.StateMachines.Player
         [SerializeField] Animator animator;
         [SerializeField] float rotationDamping;
 
+        private Transform enemyTransform;
         private Camera mainCam;
         private Vector2 movementInputValue;
         private CharacterController characterController;
@@ -25,6 +26,7 @@ namespace Ludias.StateMachines.Player
         private void Start()
         {
             mainCam = Camera.main;
+            enemyTransform = GameObject.FindGameObjectWithTag("Enemy").transform;
 
             SwitchState(new PlayerFreeLookState(this));
         }
@@ -55,6 +57,8 @@ namespace Ludias.StateMachines.Player
 
         public float GetMoveSpeed() => moveSpeed;
         public float GetRotationDamping() => rotationDamping;
+
+        public Transform GetEnemyTransform() => enemyTransform;
 
         public CharacterController GetCharacterController() => characterController;
 
