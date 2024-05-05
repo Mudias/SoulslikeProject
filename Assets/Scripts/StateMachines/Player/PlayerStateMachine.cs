@@ -6,6 +6,8 @@ namespace Ludias.StateMachines.Player
     public class PlayerStateMachine : StateMachine
     {
         public event EventHandler OnJumped;
+        public event EventHandler OnEnemyTargeted;
+        public event EventHandler OnTargetCanceled;
 
         [SerializeField] float moveSpeed;
         [SerializeField] Animator animator;
@@ -39,6 +41,16 @@ namespace Ludias.StateMachines.Player
         public void OnJump()
         {
             OnJumped?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void OnTargetEnemy()
+        {
+            OnEnemyTargeted?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void OnCancelTarget()
+        {
+            OnTargetCanceled?.Invoke(this, EventArgs.Empty);
         }
 
         public float GetMoveSpeed() => moveSpeed;

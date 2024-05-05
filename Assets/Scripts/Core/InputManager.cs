@@ -28,6 +28,8 @@ namespace Ludias.Core
             playerStateMachine = playerGO.GetComponent<PlayerStateMachine>();
 
             playerAction.Jump.performed += ctx => playerStateMachine.OnJump();
+            playerAction.TargetEnemy.performed += ctx => playerStateMachine.OnTargetEnemy();
+            playerAction.CancelTarget.performed += ctx => playerStateMachine.OnCancelTarget();
         }
 
         private void OnEnable()

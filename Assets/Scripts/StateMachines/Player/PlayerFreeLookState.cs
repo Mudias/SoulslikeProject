@@ -21,6 +21,7 @@ namespace Ludias
         public override void Enter()
         {
             stateMachine.OnJumped += OnJump;
+            stateMachine.OnEnemyTargeted += StateMachine_OnEnemyTargeted;
         }
 
         public override void Tick(float deltaTime)
@@ -41,11 +42,17 @@ namespace Ludias
         public override void Exit()
         {
             stateMachine.OnJumped -= OnJump;
+            stateMachine.OnEnemyTargeted -= StateMachine_OnEnemyTargeted;
         }
 
         public void OnJump(object sender, EventArgs e)
         {
             stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
+        }
+
+        private void StateMachine_OnEnemyTargeted(object sender, System.EventArgs e)
+        {
+            stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
         }
 
         private Vector3 CalculateMovement(float deltaTime)
