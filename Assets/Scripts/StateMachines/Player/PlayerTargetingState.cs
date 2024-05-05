@@ -19,6 +19,12 @@ namespace Ludias.StateMachines.Player
 
         public override void Tick(float deltaTime)
         {
+            if (stateMachine.IsAttacking())
+            {
+                stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
+                return;
+            }
+
             Vector3 movement = CalculateMovement();
             Move(movement, stateMachine.GetMoveSpeed(), deltaTime);
 

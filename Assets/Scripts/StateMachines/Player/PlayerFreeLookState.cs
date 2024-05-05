@@ -13,12 +13,8 @@ namespace Ludias
         private readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
 
         private const float animatorDampTime = 0.1f;
-        private const float gravity = -9.81f;
-        private bool isGrounded;
         private Vector3 moveDir;
         private Vector3 calculatedMoveDir;
-        private Vector3 calculatedPlayerVelocity;
-        private Vector3 playerVelocity;
 
         public override void Enter()
         {
@@ -30,13 +26,17 @@ namespace Ludias
 
         public override void Tick(float deltaTime)
         {
-            isGrounded = stateMachine.GetCharacterController().isGrounded;
+            base.Tick(deltaTime);
+
+            if (stateMachine.IsAttacking())
+            {
+                stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
+                return;
+            }
 
             calculatedMoveDir = CalculateMovement(deltaTime);
-            calculatedPlayerVelocity = CalculatePlayerVelocity(deltaTime);
 
             Move(calculatedMoveDir, stateMachine.GetMoveSpeed(), deltaTime);
-            Move(calculatedPlayerVelocity, 1, deltaTime);
 
             if (stateMachine.GetMovementInputValue() == Vector2.zero)
             {
@@ -71,18 +71,6 @@ namespace Ludias
             moveDir.Normalize();
 
             return moveDir;
-        }
-
-        private Vector3 CalculatePlayerVelocity(float deltaTime)
-        {
-            playerVelocity.y += gravity * deltaTime;
-
-            if (isGrounded && playerVelocity.y < 0)
-            {
-                playerVelocity.y = -2;
-            }
-
-            return playerVelocity;
         }
 
         private void FaceMovementDirection(Vector3 movement, float deltaTime)

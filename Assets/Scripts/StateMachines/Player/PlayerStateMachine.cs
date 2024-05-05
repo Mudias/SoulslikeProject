@@ -12,7 +12,9 @@ namespace Ludias.StateMachines.Player
         [SerializeField] float moveSpeed;
         [SerializeField] Animator animator;
         [SerializeField] float rotationDamping;
+        [SerializeField] Attack[] attacksArray;
 
+        private bool isAttacking;
         private Transform enemyTransform;
         private Camera mainCam;
         private Vector2 movementInputValue;
@@ -50,6 +52,16 @@ namespace Ludias.StateMachines.Player
             OnEnemyTargeted?.Invoke(this, EventArgs.Empty);
         }
 
+        public void SetIsAttacking(bool attackState)
+        {
+             isAttacking = attackState;
+        }
+
+        public bool IsAttacking()
+        {
+            return isAttacking;
+        }
+
         public void OnCancelTarget()
         {
             OnTargetCanceled?.Invoke(this, EventArgs.Empty);
@@ -57,6 +69,7 @@ namespace Ludias.StateMachines.Player
 
         public float GetMoveSpeed() => moveSpeed;
         public float GetRotationDamping() => rotationDamping;
+        public Attack[] GetAttacksArray() => attacksArray;
 
         public Transform GetEnemyTransform() => enemyTransform;
 

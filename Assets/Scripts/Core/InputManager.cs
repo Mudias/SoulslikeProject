@@ -30,6 +30,8 @@ namespace Ludias.Core
             playerAction.Jump.performed += ctx => playerStateMachine.OnJump();
             playerAction.TargetEnemy.performed += ctx => playerStateMachine.OnTargetEnemy();
             playerAction.CancelTarget.performed += ctx => playerStateMachine.OnCancelTarget();
+            playerAction.Attack.performed += ctx => playerStateMachine.SetIsAttacking(true);
+            playerAction.Attack.canceled += ctx => playerStateMachine.SetIsAttacking(false);
         }
 
         private void OnEnable()

@@ -1457,6 +1457,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1405165222096038362, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2289187058215691692, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1513,6 +1517,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5232873934321490936, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6500203037687651098, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
       propertyPath: moveSpeed
       value: 12
@@ -1521,6 +1529,38 @@ PrefabInstance:
       propertyPath: cinemachineCamera
       value: 
       objectReference: {fileID: 2023592060}
+    - target: {fileID: 6500203037687651098, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+      propertyPath: attacksArray.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500203037687651098, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+      propertyPath: attacksArray.Array.data[0].animationName
+      value: Attack1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500203037687651098, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+      propertyPath: attacksArray.Array.data[1].animationName
+      value: Attack2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500203037687651098, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+      propertyPath: attacksArray.Array.data[0].comboAttackTime
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500203037687651098, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+      propertyPath: attacksArray.Array.data[0].comboStateIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500203037687651098, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+      propertyPath: attacksArray.Array.data[1].comboStateIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500203037687651098, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+      propertyPath: attacksArray.Array.data[0].transitionDuration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500203037687651098, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+      propertyPath: attacksArray.Array.data[1].transitionDuration
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7795971302599697278, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
       propertyPath: m_IsActive
       value: 0
