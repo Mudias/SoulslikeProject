@@ -1,8 +1,8 @@
-using Ludias.StateMachines.Player;
+using Ludias.Combat.StateMachines.Player;
 using Unity.Cinemachine;
 using UnityEngine;
 
-namespace Ludias.Characters
+namespace Ludias.Combat.Characters
 {
     public class EnemyTargeter : MonoBehaviour
     {

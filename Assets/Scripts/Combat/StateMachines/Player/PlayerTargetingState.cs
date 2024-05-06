@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Ludias.StateMachines.Player
+namespace Ludias.Combat.StateMachines.Player
 {
     public class PlayerTargetingState : PlayerBaseState
     {
@@ -9,12 +9,13 @@ namespace Ludias.StateMachines.Player
         private readonly int TargetingBlendTreeHash = Animator.StringToHash("TargetingBlendTree");
         private readonly int TargetingForwardSpeedHash = Animator.StringToHash("TargetingForwardSpeed");
         private readonly int TargetingRightSpeedHash = Animator.StringToHash("TargetingRightSpeed");
+        private const float CROSS_FADE_DURATION = 0.1f;
 
         public override void Enter()
         {
             stateMachine.OnTargetCanceled += StateMachine_OnTargetCanceled;
 
-            stateMachine.GetAnimator().Play(TargetingBlendTreeHash);
+            stateMachine.GetAnimator().CrossFadeInFixedTime(TargetingBlendTreeHash, CROSS_FADE_DURATION);
         }
 
         public override void Tick(float deltaTime)

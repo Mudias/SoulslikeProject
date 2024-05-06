@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
 
-namespace Ludias.StateMachines.Player
+namespace Ludias.Combat.StateMachines.Player
 {
     public class PlayerAttackingState : PlayerBaseState
     {
         private float previousFrameTime;
+        private bool hasAlreadyAppliedForce;
         private Attack attack;
 
         public PlayerAttackingState(PlayerStateMachine stateMachine, int attackIndex) : base(stateMachine)
@@ -19,6 +20,7 @@ namespace Ludias.StateMachines.Player
         {
             stateMachine.GetAnimator().CrossFadeInFixedTime(attack.GetAnimationName(), attack.GetTransitionDuration());
             //stateMachine.OnJumped += OnJump;
+            stateMachine.GetWeaponDamage().SetAttack(attack.GetDamageAmount());
         }
 
         public override void Tick(float deltaTime)
@@ -28,8 +30,13 @@ namespace Ludias.StateMachines.Player
 
             float normalizedTime = GetNormalizedTime();
 
-            if (normalizedTime > previousFrameTime && normalizedTime < 1f)
+            if (normalizedTime < 1f)
             {
+                if (normalizedTime >= attack.GetForceTime())
+                {
+                    TryApplyForce();
+                }
+
                 if (stateMachine.IsAttacking())
                 {
                     TryComboAttack(normalizedTime);
@@ -37,6 +44,13 @@ namespace Ludias.StateMachines.Player
             }else
             {
                 // go back to locomotion
+                if (stateMachine.IsTargetingEnemy())
+                {
+                    stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
+                }else
+                {
+                    stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
+                }
             }
 
             previousFrameTime = normalizedTime;
@@ -59,6 +73,15 @@ namespace Ludias.StateMachines.Player
             if (normalizedTime < attack.GetComboAttackTime()) return;
 
             stateMachine.SwitchState(new PlayerAttackingState(stateMachine,attack.GetComboStateIndex()));
+        }
+
+        private void TryApplyForce()
+        {
+            if (hasAlreadyAppliedForce) return;
+
+            stateMachine.GetForceReciever().AddForce(stateMachine.transform.forward * attack.GetForce());
+
+            hasAlreadyAppliedForce = true;
         }
 
         private float GetNormalizedTime()

@@ -1,5 +1,5 @@
-using Ludias.Characters;
-using Ludias.StateMachines.Player;
+using Ludias.Combat.Characters;
+using Ludias.Combat.StateMachines.Player;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

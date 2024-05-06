@@ -1,9 +1,9 @@
-using Ludias.StateMachines.Player;
+using Ludias.Combat.StateMachines.Player;
 using System;
 using UnityEngine;
 using UnityEngine.Windows;
 
-namespace Ludias
+namespace Ludias.Combat
 {
     public class PlayerFreeLookState : PlayerBaseState
     {
@@ -12,7 +12,8 @@ namespace Ludias
         private readonly int FreeLookBlendTreeHash = Animator.StringToHash("FreeLookBlendTree");
         private readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
 
-        private const float animatorDampTime = 0.1f;
+        private const float ANIMATOR_DAMP_TIME = 0.1f;
+        private const float CROSS_FADE_DURATION = 0.1f;
         private Vector3 moveDir;
         private Vector3 calculatedMoveDir;
 
@@ -21,7 +22,7 @@ namespace Ludias
             stateMachine.OnJumped += OnJump;
             stateMachine.OnEnemyTargeted += StateMachine_OnEnemyTargeted;
 
-            stateMachine.GetAnimator().Play(FreeLookBlendTreeHash);
+            stateMachine.GetAnimator().CrossFadeInFixedTime(FreeLookBlendTreeHash, CROSS_FADE_DURATION);
         }
 
         public override void Tick(float deltaTime)
@@ -40,11 +41,11 @@ namespace Ludias
 
             if (stateMachine.GetMovementInputValue() == Vector2.zero)
             {
-                stateMachine.GetAnimator().SetFloat(FreeLookSpeedHash, 0, animatorDampTime, deltaTime);
+                stateMachine.GetAnimator().SetFloat(FreeLookSpeedHash, 0, ANIMATOR_DAMP_TIME, deltaTime);
                 return;
             }
 
-            stateMachine.GetAnimator().SetFloat(FreeLookSpeedHash, 1, animatorDampTime, deltaTime);
+            stateMachine.GetAnimator().SetFloat(FreeLookSpeedHash, 1, ANIMATOR_DAMP_TIME, deltaTime);
             FaceMovementDirection(calculatedMoveDir, deltaTime);
         }
 

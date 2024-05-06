@@ -1,9 +1,8 @@
 {
-    "name": "Characters",
-    "rootNamespace": "Ludias.Characters",
+    "name": "StateMachines",
+    "rootNamespace": "Ludias.Combat.StateMachines",
     "references": [
-        "GUID:4307f53044263cf4b835bd812fc161a4",
-        "GUID:e3a56dba048cedc449ebe3da4ab859af"
+        "GUID:97c3adf8d16bc3749a9aa017295145ab"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

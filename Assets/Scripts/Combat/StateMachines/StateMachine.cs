@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Ludias.StateMachines
+namespace Ludias.Combat.StateMachines
 {
     public abstract class StateMachine : MonoBehaviour
     {

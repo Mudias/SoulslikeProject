@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Ludias.StateMachines.Player
+namespace Ludias.Combat.StateMachines.Player
 {
     public abstract class PlayerBaseState : State
     {
@@ -28,7 +28,7 @@ namespace Ludias.StateMachines.Player
                 playerVelocity.y = -2;
             }
 
-            stateMachine.GetCharacterController().Move((moveDir + playerVelocity) * moveSpeed * deltaTime);
+            stateMachine.GetCharacterController().Move((moveDir + playerVelocity + stateMachine.GetForceReciever().MovementForce) * moveSpeed * deltaTime);
         }
 
         protected void Move(float deltaTime)

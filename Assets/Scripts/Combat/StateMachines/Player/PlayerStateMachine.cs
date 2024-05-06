@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Ludias.StateMachines.Player
+namespace Ludias.Combat.StateMachines.Player
 {
     public class PlayerStateMachine : StateMachine
     {
@@ -13,9 +13,12 @@ namespace Ludias.StateMachines.Player
         [SerializeField] Animator animator;
         [SerializeField] float rotationDamping;
         [SerializeField] Attack[] attacksArray;
-
+        [SerializeField] WeaponDamage weaponDamage;
+        
         private bool isAttacking;
+        private bool isTargetingEnemy;
         private Transform enemyTransform;
+        private ForceReciever forceReciever;
         private Camera mainCam;
         private Vector2 movementInputValue;
         private CharacterController characterController;
@@ -23,6 +26,7 @@ namespace Ludias.StateMachines.Player
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();
+            forceReciever = GetComponent<ForceReciever>();
         }
 
         private void Start()
@@ -49,6 +53,7 @@ namespace Ludias.StateMachines.Player
 
         public void OnTargetEnemy()
         {
+            isTargetingEnemy = true;
             OnEnemyTargeted?.Invoke(this, EventArgs.Empty);
         }
 
@@ -64,13 +69,17 @@ namespace Ludias.StateMachines.Player
 
         public void OnCancelTarget()
         {
+            isTargetingEnemy = false;
             OnTargetCanceled?.Invoke(this, EventArgs.Empty);
         }
 
         public float GetMoveSpeed() => moveSpeed;
         public float GetRotationDamping() => rotationDamping;
+        public bool IsTargetingEnemy() => isTargetingEnemy;
+        public WeaponDamage GetWeaponDamage() => weaponDamage;
         public Attack[] GetAttacksArray() => attacksArray;
 
+        public ForceReciever GetForceReciever() => forceReciever;
         public Transform GetEnemyTransform() => enemyTransform;
 
         public CharacterController GetCharacterController() => characterController;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Ludias.Characters
+namespace Ludias.Combat.Characters
 {
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour
@@ -38,7 +38,7 @@ namespace Ludias.Characters
             moveDir.Normalize();
 
             characterController.Move(moveDir * moveSpeed * Time.deltaTime);
-            return;
+
             playerVelocity.y += gravity * Time.deltaTime;
 
             if (isGrounded && playerVelocity.y < 0)
