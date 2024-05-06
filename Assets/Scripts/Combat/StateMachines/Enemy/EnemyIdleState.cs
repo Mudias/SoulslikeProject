@@ -14,11 +14,18 @@ namespace Ludias.Combat.StateMachines
         public override void Enter()
         {
             stateMachine.GetAnimator().CrossFadeInFixedTime(LocomotionBlendTreeHash, CROSS_FADE_DURATION);
-
         }
 
         public override void Tick(float deltaTime)
         {
+            Move(deltaTime);
+
+            if (IsInChaseRange())
+            {
+                stateMachine.SwitchState(new EnemyChasingState(stateMachine));
+                return;
+            }
+
             stateMachine.GetAnimator().SetFloat(SpeedHash, 0, ANIMATOR_DAMP_TIME, deltaTime);
         }
 
