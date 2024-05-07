@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Ludias.Combat.StateMachines
+namespace Ludias.Combat.StateMachines.Enemy
 {
     public class EnemyBaseState : State
     {
@@ -46,6 +46,14 @@ namespace Ludias.Combat.StateMachines
         {
             Move(Vector3.zero, 0, deltaTime);
 
+        }
+
+        protected void FacePlayer()
+        {
+            Vector3 targetDirection = (stateMachine.GetPlayerTransform().position - stateMachine.transform.position).normalized;
+            targetDirection.y = 0;
+
+            stateMachine.transform.rotation = Quaternion.LookRotation(targetDirection);
         }
 
         protected bool IsInChaseRange()

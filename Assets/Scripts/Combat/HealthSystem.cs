@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 
 namespace Ludias.Combat
 {
     public class HealthSystem : MonoBehaviour
     {
+        public event EventHandler OnTakeDamage;
+
         [SerializeField] int maxHealth = 100;
 
         private int currentHealth;
@@ -18,6 +21,8 @@ namespace Ludias.Combat
             if (currentHealth == 0) return;
 
             currentHealth = Mathf.Max(currentHealth - damageAmount, 0);
+
+            OnTakeDamage?.Invoke(this, EventArgs.Empty);
 
             Debug.Log($"Took {damageAmount} damage, current health: {currentHealth}");
 

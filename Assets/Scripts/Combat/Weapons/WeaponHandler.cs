@@ -4,16 +4,22 @@ namespace Ludias.Combat
 {
     public class WeaponHandler : MonoBehaviour
     {
-        [SerializeField] GameObject weaponLogic;
+        [SerializeField] GameObject[] weaponLogicArray;
 
         public void EnableWeapon()
         {
-            weaponLogic.SetActive(true);
+            foreach (GameObject weapon in weaponLogicArray)
+            {
+                weapon.SetActive(true);
+            }
         }
 
         public void DisableWeapon()
         {
-            weaponLogic.SetActive(false);
+            foreach (GameObject weapon in weaponLogicArray)
+            {
+                weapon.SetActive(false);
+            }
         }
     }
 }

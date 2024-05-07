@@ -1,7 +1,8 @@
+using Ludias.Combat.StateMachines.Player;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Ludias.Combat
+namespace Ludias.Combat.StateMachines
 {
 	public class WeaponDamage : MonoBehaviour
 	{
@@ -27,6 +28,11 @@ namespace Ludias.Combat
             if (other.TryGetComponent(out HealthSystem healthSystem))
             {
                 healthSystem.TakeDamage(damageAmount);
+            }
+
+            if (other.TryGetComponent(out ForceReciever forceReciever))
+            {
+                forceReciever.AddForce((other.transform.position - myCollider.transform.position).normalized * knockback);
             }
         }
 

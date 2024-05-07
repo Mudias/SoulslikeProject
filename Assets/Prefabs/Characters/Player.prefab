@@ -409,7 +409,6 @@ Transform:
   m_Children:
   - {fileID: 9109829480006290807}
   - {fileID: 803479848312035827}
-  - {fileID: 1956858619153751971}
   m_Father: {fileID: 676977714384697356}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2031106787956693402
@@ -706,12 +705,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2395533074494873226}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.000000017870587, y: 0.000000009622689, z: 0.000000030214018, w: 1}
+  m_LocalPosition: {x: 0, y: -0.03330933, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2686468643108703554}
+  m_Father: {fileID: 803479848312035827}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &188485387520618401
 CapsuleCollider:
@@ -749,7 +748,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCollider: {fileID: 2590943198368931754}
-  damageAmount: 20
 --- !u!54 &7862266272969441612
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -905,6 +903,7 @@ MonoBehaviour:
     comboAttackTime: 0.6
     forceTime: 0.35
     force: 15
+    knockback: 15
     damageAmount: 15
   - animationName: Attack2
     transitionDuration: 0.1
@@ -912,6 +911,7 @@ MonoBehaviour:
     comboAttackTime: 0
     forceTime: 0.35
     force: 20
+    knockback: 20
     damageAmount: 20
   weaponDamage: {fileID: 2053592524394958162}
 --- !u!114 &1006887574386788918
@@ -1690,7 +1690,8 @@ Transform:
   m_LocalPosition: {x: 0.000000059604645, y: 0.03330931, z: -0.00000023864456}
   m_LocalScale: {x: 1.0000005, y: 1.0000005, z: 1.0000001}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1956858619153751971}
   m_Father: {fileID: 2686468643108703554}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &93290402004584746
@@ -2486,7 +2487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8355eae207d5d7643a659f06047dbedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponLogic: {fileID: 2395533074494873226}
+  weaponLogicArray: []
 --- !u!1 &7462552554061588180
 GameObject:
   m_ObjectHideFlags: 0

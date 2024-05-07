@@ -22,11 +22,13 @@ namespace Ludias.Combat.StateMachines.Player
         private Camera mainCam;
         private Vector2 movementInputValue;
         private CharacterController characterController;
+        private HealthSystem healthSystem;
 
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();
             forceReciever = GetComponent<ForceReciever>();
+            healthSystem = GetComponent<HealthSystem>();
         }
 
         private void Start()
@@ -35,6 +37,21 @@ namespace Ludias.Combat.StateMachines.Player
             enemyTransform = GameObject.FindGameObjectWithTag("Enemy").transform;
 
             SwitchState(new PlayerFreeLookState(this));
+        }
+
+        private void OnEnable()
+        {
+            healthSystem.OnTakeDamage += HealthSystem_OnTakeDamage;
+        }
+
+        private void OnDisable()
+        {
+            healthSystem.OnTakeDamage -= HealthSystem_OnTakeDamage;
+        }
+
+        private void HealthSystem_OnTakeDamage(object sender, EventArgs e)
+        {
+            SwitchState(new PlayerImpactState(this));
         }
 
         public Camera GetMainCam() => mainCam;

@@ -44,5 +44,10 @@ namespace Ludias.Combat.StateMachines.Player
 
             stateMachine.transform.rotation = Quaternion.LookRotation(targetDirection);
         }
+
+        protected void ReturnToLocomotion()
+        {
+            stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
+        }
     }
 }

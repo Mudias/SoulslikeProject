@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Ludias.Combat.StateMachines
+namespace Ludias.Combat.StateMachines.Enemy
 {
     public class EnemyIdleState : EnemyBaseState
     {
@@ -25,6 +25,8 @@ namespace Ludias.Combat.StateMachines
                 stateMachine.SwitchState(new EnemyChasingState(stateMachine));
                 return;
             }
+
+            FacePlayer();
 
             stateMachine.GetAnimator().SetFloat(SpeedHash, 0, ANIMATOR_DAMP_TIME, deltaTime);
         }

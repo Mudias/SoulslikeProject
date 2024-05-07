@@ -12,6 +12,7 @@ namespace Ludias.Combat.StateMachines.Player
         [SerializeField] float comboAttackTime;
         [SerializeField] float forceTime;
         [SerializeField] float force;
+        [SerializeField] float knockback;
         [SerializeField] int damageAmount;
 
         public int GetDamageAmount() => damageAmount;
@@ -20,6 +21,7 @@ namespace Ludias.Combat.StateMachines.Player
         public int GetComboStateIndex() => comboStateIndex;
         public float GetComboAttackTime() => comboAttackTime;
         public float GetForceTime() => forceTime;
+        public float GetKnockback() => knockback;
         public float GetForce() => force;
     }
 }

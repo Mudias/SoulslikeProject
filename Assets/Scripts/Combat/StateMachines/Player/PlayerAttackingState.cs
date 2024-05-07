@@ -20,7 +20,7 @@ namespace Ludias.Combat.StateMachines.Player
         {
             stateMachine.GetAnimator().CrossFadeInFixedTime(attack.GetAnimationName(), attack.GetTransitionDuration());
             //stateMachine.OnJumped += OnJump;
-            stateMachine.GetWeaponDamage().SetAttack(attack.GetDamageAmount());
+            stateMachine.GetWeaponDamage().SetAttack(attack.GetDamageAmount(), attack.GetKnockback());
         }
 
         public override void Tick(float deltaTime)
@@ -28,7 +28,7 @@ namespace Ludias.Combat.StateMachines.Player
             Move(deltaTime);
             FaceTarget();
 
-            float normalizedTime = GetNormalizedTime();
+            float normalizedTime = GetNormalizedTime(stateMachine.GetAnimator());
 
             if (normalizedTime < 1f)
             {
@@ -82,23 +82,6 @@ namespace Ludias.Combat.StateMachines.Player
             stateMachine.GetForceReciever().AddForce(stateMachine.transform.forward * attack.GetForce());
 
             hasAlreadyAppliedForce = true;
-        }
-
-        private float GetNormalizedTime()
-        {
-            AnimatorStateInfo currentStateInfo = stateMachine.GetAnimator().GetCurrentAnimatorStateInfo(0);
-            AnimatorStateInfo nextStateInfo = stateMachine.GetAnimator().GetNextAnimatorStateInfo(0);
-
-            if (stateMachine.GetAnimator().IsInTransition(0) && nextStateInfo.IsTag("Attack"))
-            {
-                return nextStateInfo.normalizedTime;
-            }else if (!stateMachine.GetAnimator().IsInTransition(0) && currentStateInfo.IsTag("Attack"))
-            {
-                return currentStateInfo.normalizedTime;
-            }else
-            {
-                return 0f;
-            }
         }
     }
 }

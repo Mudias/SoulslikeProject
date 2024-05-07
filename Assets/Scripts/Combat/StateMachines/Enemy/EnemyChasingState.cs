@@ -1,7 +1,6 @@
-using UnityEditorInternal;
 using UnityEngine;
 
-namespace Ludias.Combat.StateMachines
+namespace Ludias.Combat.StateMachines.Enemy
 {
     public class EnemyChasingState : EnemyBaseState
     {
@@ -25,7 +24,15 @@ namespace Ludias.Combat.StateMachines
                 return;
             }
 
+            if (IsInAttackRange())
+            {
+                stateMachine.SwitchState(new EnemyAttackingState(stateMachine));
+                return;
+            }
+
             MoveToPlayer(deltaTime);
+
+            FacePlayer();
 
             stateMachine.GetAnimator().SetFloat(SpeedHash, 1, ANIMATOR_DAMP_TIME, deltaTime);
         }
@@ -38,10 +45,20 @@ namespace Ludias.Combat.StateMachines
 
         private void MoveToPlayer(float deltaTime)
         {
-            stateMachine.GetAgent().destination = stateMachine.GetPlayerGO().transform.position;
-            Move(stateMachine.GetAgent().desiredVelocity.normalized, stateMachine.GetMoveSpeed(), deltaTime);
+            if (stateMachine.GetAgent().isOnNavMesh)
+            {
+                stateMachine.GetAgent().destination = stateMachine.GetPlayerGO().transform.position;
+                Move(stateMachine.GetAgent().desiredVelocity.normalized, stateMachine.GetMoveSpeed(), deltaTime);
+            }
 
             stateMachine.GetAgent().velocity = stateMachine.GetCharacterController().velocity;
+        }
+
+        private bool IsInAttackRange()
+        {
+            float distanceToPlayerSqr = (stateMachine.GetPlayerGO().transform.position - stateMachine.transform.position).sqrMagnitude;
+
+            return distanceToPlayerSqr <= stateMachine.GetAttackRange() * stateMachine.GetAttackRange();
         }
     }
 }
