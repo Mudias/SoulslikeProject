@@ -57,7 +57,7 @@ namespace Ludias.Combat
 
         public void OnJump(object sender, EventArgs e)
         {
-            stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
+            stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
         }
 
         private void StateMachine_OnEnemyTargeted(object sender, System.EventArgs e)

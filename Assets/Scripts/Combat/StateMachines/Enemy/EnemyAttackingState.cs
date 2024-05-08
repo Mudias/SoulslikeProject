@@ -25,6 +25,8 @@ namespace Ludias.Combat.StateMachines.Enemy
             {
                 stateMachine.SwitchState(new EnemyChasingState(stateMachine));
             }
+
+            FacePlayer();
         }
 
         public override void Exit()

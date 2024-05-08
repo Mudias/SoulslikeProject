@@ -58,7 +58,9 @@ namespace Ludias.Combat.StateMachines.Enemy
 
         protected bool IsInChaseRange()
         {
-            float distanceToPlayerSqr = (stateMachine.GetPlayerGO().transform.position - stateMachine.transform.position).sqrMagnitude;
+            if (stateMachine.GetPlayerHealthSystem().IsDead) return false;
+
+            float distanceToPlayerSqr = (stateMachine.GetPlayerHealthSystem().transform.position - stateMachine.transform.position).sqrMagnitude;
 
             return distanceToPlayerSqr <= stateMachine.GetPlayerChasingRange() * stateMachine.GetPlayerChasingRange();
         }

@@ -32,6 +32,7 @@ namespace Ludias.Core
             playerAction.CancelTarget.performed += ctx => playerStateMachine.OnCancelTarget();
             playerAction.Attack.performed += ctx => playerStateMachine.SetIsAttacking(true);
             playerAction.Attack.canceled += ctx => playerStateMachine.SetIsAttacking(false);
+            playerAction.Dodge.performed += ctx => playerStateMachine.Dodge();
         }
 
         private void OnEnable()

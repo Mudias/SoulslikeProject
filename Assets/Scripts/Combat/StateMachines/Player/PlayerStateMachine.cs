@@ -1,4 +1,5 @@
 using System;
+using UnityEditorInternal;
 using UnityEngine;
 
 namespace Ludias.Combat.StateMachines.Player
@@ -10,11 +11,16 @@ namespace Ludias.Combat.StateMachines.Player
         public event EventHandler OnTargetCanceled;
 
         [SerializeField] float moveSpeed;
-        [SerializeField] Animator animator;
         [SerializeField] float rotationDamping;
+        [SerializeField] float dodgeDuration;
+        [SerializeField] float dodgeLength;
+        [SerializeField] float jumpForce;
+        [SerializeField] Animator animator;
         [SerializeField] Attack[] attacksArray;
         [SerializeField] WeaponDamage weaponDamage;
         
+        private float previousDodgeTime = Mathf.NegativeInfinity;
+        private float remainingDodgeTime;
         private bool isAttacking;
         private bool isTargetingEnemy;
         private Transform enemyTransform;
@@ -42,16 +48,23 @@ namespace Ludias.Combat.StateMachines.Player
         private void OnEnable()
         {
             healthSystem.OnTakeDamage += HealthSystem_OnTakeDamage;
+            healthSystem.OnDie += HealthSystem_OnDie;
         }
 
         private void OnDisable()
         {
             healthSystem.OnTakeDamage -= HealthSystem_OnTakeDamage;
+            healthSystem.OnDie -= HealthSystem_OnDie;
         }
 
         private void HealthSystem_OnTakeDamage(object sender, EventArgs e)
         {
             SwitchState(new PlayerImpactState(this));
+        }
+
+        private void HealthSystem_OnDie(object sender, EventArgs e)
+        {
+            SwitchState(new PlayerDeadState(this));
         }
 
         public Camera GetMainCam() => mainCam;
@@ -66,6 +79,13 @@ namespace Ludias.Combat.StateMachines.Player
         public void OnJump()
         {
             OnJumped?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void Dodge()
+        {
+            if (movementInputValue == Vector2.zero) return;
+
+            SwitchState(new PlayerDodgingState(this, movementInputValue));
         }
 
         public void OnTargetEnemy()
@@ -92,7 +112,14 @@ namespace Ludias.Combat.StateMachines.Player
 
         public float GetMoveSpeed() => moveSpeed;
         public float GetRotationDamping() => rotationDamping;
+        public float GetDodgeDuration() => dodgeDuration;
+        public float GetPreviousDodgeTime() => previousDodgeTime;
+        public float GetRemainingDodgeTime() => remainingDodgeTime;
+        public float SetRemainingDodgeTime(float remainingDodgeTime) => this.remainingDodgeTime = remainingDodgeTime;
+        public void DecrementRemainingDodgeTime(float deltaTime) => remainingDodgeTime -= deltaTime;
+        public float GetDodgeLength() => dodgeLength;
         public bool IsTargetingEnemy() => isTargetingEnemy;
+        public HealthSystem GetHealthSystem() => healthSystem;
         public WeaponDamage GetWeaponDamage() => weaponDamage;
         public Attack[] GetAttacksArray() => attacksArray;
 

@@ -47,7 +47,7 @@ namespace Ludias.Combat.StateMachines.Enemy
         {
             if (stateMachine.GetAgent().isOnNavMesh)
             {
-                stateMachine.GetAgent().destination = stateMachine.GetPlayerGO().transform.position;
+                stateMachine.GetAgent().destination = stateMachine.GetPlayerHealthSystem().transform.position;
                 Move(stateMachine.GetAgent().desiredVelocity.normalized, stateMachine.GetMoveSpeed(), deltaTime);
             }
 
@@ -56,7 +56,9 @@ namespace Ludias.Combat.StateMachines.Enemy
 
         private bool IsInAttackRange()
         {
-            float distanceToPlayerSqr = (stateMachine.GetPlayerGO().transform.position - stateMachine.transform.position).sqrMagnitude;
+            if (stateMachine.GetPlayerHealthSystem().IsDead) return false;
+
+            float distanceToPlayerSqr = (stateMachine.GetPlayerHealthSystem().transform.position - stateMachine.transform.position).sqrMagnitude;
 
             return distanceToPlayerSqr <= stateMachine.GetAttackRange() * stateMachine.GetAttackRange();
         }

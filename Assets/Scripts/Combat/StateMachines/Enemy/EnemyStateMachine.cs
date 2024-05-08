@@ -19,7 +19,7 @@ namespace Ludias.Combat.StateMachines.Enemy
         private NavMeshAgent agent;
         private HealthSystem healthSystem;
 
-        private GameObject playerGO;
+        private HealthSystem playerHealthSystem;
 
         private void Awake()
         {
@@ -30,7 +30,7 @@ namespace Ludias.Combat.StateMachines.Enemy
 
         private void Start()
         {
-            playerGO = GameObject.FindGameObjectWithTag("Player");
+            playerHealthSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSystem>();
 
             agent = GetComponent<NavMeshAgent>();
 
@@ -43,11 +43,13 @@ namespace Ludias.Combat.StateMachines.Enemy
         private void OnEnable()
         {
             healthSystem.OnTakeDamage += HealthSystem_OnTakeDamage;
+            healthSystem.OnDie += HealthSystem_OnDie;
         }
 
         private void OnDisable()
         {
             healthSystem.OnTakeDamage -= HealthSystem_OnTakeDamage;
+            healthSystem.OnDie -= HealthSystem_OnDie;
         }
 
         private void HealthSystem_OnTakeDamage(object sender, System.EventArgs e)
@@ -55,14 +57,19 @@ namespace Ludias.Combat.StateMachines.Enemy
             SwitchState(new EnemyImpactState(this));
         }
 
+        private void HealthSystem_OnDie(object sender, System.EventArgs e)
+        {
+            SwitchState(new EnemyDeadState(this));
+        }
+
         public float GetMoveSpeed() => moveSpeed;
-        public GameObject GetPlayerGO() => playerGO;
+        public HealthSystem GetPlayerHealthSystem() => playerHealthSystem;
         public Animator GetAnimator() => animator;
         public float GetPlayerChasingRange() => playerChasingRange;
         public float GetAttackRange() => attackRange;
         public int GetAttackDamage() => attackDamage;
         public float GetAttackKnockback() => attackKnockback;
-        public Transform GetPlayerTransform() => playerGO.transform;
+        public Transform GetPlayerTransform() => playerHealthSystem.transform;
         public CharacterController GetCharacterController() => characterController;
         public ForceReciever GetForceReciever() => forceReciever;
         public NavMeshAgent GetAgent() => agent;

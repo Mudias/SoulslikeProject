@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Ludias.Combat.StateMachines.Player
@@ -13,6 +14,7 @@ namespace Ludias.Combat.StateMachines.Player
 
         public override void Enter()
         {
+            stateMachine.OnJumped += OnJump;
             stateMachine.OnTargetCanceled += StateMachine_OnTargetCanceled;
 
             stateMachine.GetAnimator().CrossFadeInFixedTime(TargetingBlendTreeHash, CROSS_FADE_DURATION);
@@ -26,7 +28,7 @@ namespace Ludias.Combat.StateMachines.Player
                 return;
             }
 
-            Vector3 movement = CalculateMovement();
+            Vector3 movement = CalculateMovement(deltaTime);
             Move(movement, stateMachine.GetMoveSpeed(), deltaTime);
 
             UpdateAnimator(deltaTime);
@@ -36,7 +38,13 @@ namespace Ludias.Combat.StateMachines.Player
 
         public override void Exit()
         {
+            stateMachine.OnJumped -= OnJump;
             stateMachine.OnTargetCanceled -= StateMachine_OnTargetCanceled;
+        }
+
+        public void OnJump(object sender, EventArgs e)
+        {
+            stateMachine.SwitchState(new PlayerJumpingState(stateMachine));
         }
 
         private void StateMachine_OnTargetCanceled(object sender, System.EventArgs e)
@@ -44,9 +52,10 @@ namespace Ludias.Combat.StateMachines.Player
             stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
         }
 
-        private Vector3 CalculateMovement()
+        private Vector3 CalculateMovement(float deltaTime)
         {
             Vector3 movement = new Vector3();
+
             movement += stateMachine.transform.right * stateMachine.GetMovementInputValue().x;
             movement += stateMachine.transform.forward * stateMachine.GetMovementInputValue().y;
 

@@ -894,8 +894,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 12
-  animator: {fileID: 224565172685277198}
   rotationDamping: 10
+  dodgeDuration: 0.6
+  dodgeLength: 3
+  jumpForce: 4
+  animator: {fileID: 224565172685277198}
   attacksArray:
   - animationName: Attack1
     transitionDuration: 0.1

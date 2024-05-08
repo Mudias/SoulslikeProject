@@ -103,6 +103,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Dodge",
+                    "type": "Button",
+                    "id": "91d4084b-1aec-4e6b-b601-560b7f75eee0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -477,6 +486,17 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "CancelTarget",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e574e794-4cea-4ef6-b7d0-9ed12d3cad86",
+                    "path": "<Keyboard>/leftAlt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard & Mouse",
+                    "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
