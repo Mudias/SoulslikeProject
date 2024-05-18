@@ -23,6 +23,9 @@ namespace Ludias.Core
 
         private void Start()
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
             playerGO = GameObject.FindGameObjectWithTag("Player");
             playerMovement = playerGO.GetComponent<PlayerMovement>();
             playerStateMachine = playerGO.GetComponent<PlayerStateMachine>();

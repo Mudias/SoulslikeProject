@@ -827,6 +827,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 967476640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &921525415 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2395533074494873226, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+  m_PrefabInstance: {fileID: 8149372231143659253}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &967476639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1400,6 +1405,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2329389326360298822, guid: e1bbe1bf51de507449b54d8fc2de44f4, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4449731596577278169, guid: e1bbe1bf51de507449b54d8fc2de44f4, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -1461,6 +1470,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9018330911562968530, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+      propertyPath: weaponLogicArray.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9018330911562968530, guid: 296355ca5dc4a1242b3b43153daad8e9, type: 3}
+      propertyPath: 'weaponLogicArray.Array.data[0]'
+      value: 
+      objectReference: {fileID: 921525415}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -36,7 +36,7 @@ namespace Ludias.Combat
 
             OnTakeDamage?.Invoke(this, EventArgs.Empty);
 
-            Debug.Log($"Took {damageAmount} damage, current health: {currentHealth}");
+            Debug.Log($"{gameObject.name} Took {damageAmount} damage, current health: {currentHealth}");
 
             if (currentHealth == 0)
             {
