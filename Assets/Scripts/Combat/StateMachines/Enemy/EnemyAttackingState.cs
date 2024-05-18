@@ -6,6 +6,7 @@ namespace Ludias.Combat.StateMachines.Enemy
     {
         private readonly int AttackHash = Animator.StringToHash("Attack");
         private readonly int WhirlwindHash = Animator.StringToHash("Whirlwind");
+        private readonly int RotatingAxesHash = Animator.StringToHash("RotatingAxes");
         private const float TRANSITION_DURATION = 0.1f;
 
         private int[] attacksArray;
@@ -14,7 +15,7 @@ namespace Ludias.Combat.StateMachines.Enemy
 
         public override void Enter()
         {
-            attacksArray = new int[] { AttackHash, WhirlwindHash};
+            attacksArray = new int[] { AttackHash, WhirlwindHash, RotatingAxesHash};
 
             foreach (WeaponDamage weaponDamage in stateMachine.GetWeaponDamageArray())
             {

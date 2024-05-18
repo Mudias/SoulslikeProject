@@ -46,5 +46,13 @@ namespace Ludias.Combat
                 OnDie?.Invoke(this, EventArgs.Empty);
             }
         }
+
+        public int GetCurrentHealth() => currentHealth;
+        public int GetMaxHealth() => maxHealth;
+
+        public float GetHealthNormalized()
+        {
+            return (float)currentHealth / maxHealth;
+        }
     }
 }
